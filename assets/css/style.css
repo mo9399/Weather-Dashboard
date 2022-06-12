@@ -1,0 +1,7 @@
+.text {
+    background:url(rain.gif);
+    font-family: fantasy;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip:text;
+    font-size: 45px;
+}

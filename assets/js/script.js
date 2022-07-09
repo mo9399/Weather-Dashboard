@@ -40,7 +40,6 @@ function formSubmitHandler(event) {
 
   // get value from input element
   var cityName = cityInputEl.value.trim();
-
   if (cityName) {
     getCityWeather(cityName);
 
@@ -49,5 +48,49 @@ function formSubmitHandler(event) {
     } else {
       alert("Please enter a city");
     }
+  };
+
+  var displayWeather = function (weatherData) {
+    // format and display data
+    $("#current-weather").addClass("border border-info border-5");
+    $("#current-weather-title").text(weatherData.name + " (" + dayjs(weatherData.dt * 1000).format("MM/DD/YYYY") + ") ")
+    .append(`<img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png"></img>`);
+  
+    // current temperature, humidity, and wind speed
+    $("#current-weather-temp").text("Temperature: " + weatherData.main.temp.toFixed(1) + "°F");
+    $("#current-weather-humidity").text("Humidity: " + weatherData.main.humidity + "%");
+    $("#current-weather-wind").text("Wind Speed: " + weatherData.wind.speed.toFixed(1) + " mph");
+     
+    // use lat & lon to make get uvi and 5-day forecast
+    fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + weatherData.coord.lat + "&lon=" + weatherData.coord.lon + "&appid=a42b1bffc45c35fcb28a1fcc1fc29685&units=imperial")
+   
+    .then(function (response) {
+      response.json().then(function (data) {
+        //  display uvIndex
+        $("#current-weather-uvi").text("UV Index: " + data.current.uvi)
+  
+        // begin conditional for styling uv index section based on value
+        var uvIndexValue = data.current.uvi.toFixed(1);
+        uvIndexEl.id = "uv-index";
+      
+        if (uvIndexValue >= 0 && uvIndexValue <= 3) {
+          uvIndexEl.className = "uv-index-green"
+        }
+        else if (uvIndexValue > 3 && uvIndexValue < 8) {
+          uvIndexEl.className = "uv-index-yellow"
+        }
+        else if (uvIndexValue >= 8) {
+          uvIndexEl.className = "uv-index-red"
+          
+        }
+        // 5 day forecast call
+        displayForecast(data);
+      });
+  
+    });
+  
+    // save the city
+    searchedCity = weatherData.name;
+    saveSearchedCities(weatherData.name);
   };
 

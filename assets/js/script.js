@@ -147,3 +147,34 @@ function formSubmitHandler(event) {
     // display searched cities
     loadSearchedCities();
   };
+
+  // load searched cities
+  var loadSearchedCities = function () {
+    searchedCities = JSON.parse(localStorage.getItem("searchHistory"));
+    searchedCity = JSON.parse(localStorage.getItem("searchedCity"));
+
+    // create empty array and string if nothing saved in local storage
+    if (!searchedCities) {
+      searchedCities = [];
+    }
+
+    if (!searchedCity) {
+      searchedCity = "";
+    }
+
+    // clear previous saved cities
+    $("#saved-cities").empty();
+
+    // loop through each city in searchedCities array
+    for (i = 0; i < searchedCities.length; i++) {
+
+      // create button
+      var cityBtn = $("<button>").addClass("btn btn-secondary").attr("type", "submit").attr("id", searchedCities[i]).text(searchedCities[i]);
+
+      // append button to parent div on the page
+      $("#saved-cities").append(cityBtn);
+  }
+
+};
+
+loadSearchedCities();

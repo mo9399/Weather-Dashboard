@@ -44,11 +44,10 @@ function formSubmitHandler(event) {
   if (cityName) {
     getCityWeather(cityName);
 
-    // clear old content
-    weatherContainerEl.textContent = "";
-    cityInputEl.value = "";
-  } else {
-    alert("Please enter a city");
-  }
-};
+     // clear the search input
+     $("#city").val("");
+    } else {
+      alert("Please enter a city");
+    }
+  };
 

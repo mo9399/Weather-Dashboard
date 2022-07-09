@@ -1,29 +1,11 @@
 var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.querySelector("#city");
 var weatherContainerEl = document.querySelector("#weather-container");
-var citySearchTerm = document.querySelector("city-search-term");
+var currentWeatherTitle = document.querySelector("#current-weather-title");
+var forecastTitle = document.querySelector("#forecast-title");
 var search = document.getElementById("search")
 
 search.addEventListener('click', formSubmitHandler)
-
-function formSubmitHandler(event) {
- 
-  // prevent page from refreshing
-  event.preventDefault();
-
-  // get value from input element
-  var cityName = cityInputEl.value.trim();
-
-  if (cityName) {
-    getCityWeather(cityName);
-
-    // clear old content
-    weatherContainerEl.textContent = "";
-    cityInputEl.value = "";
-  } else {
-    alert("Please enter a city");
-  }
-};
 
 function getCityWeather(city) {
   console.log(city, 'CITY NAME LINE 29')
@@ -50,3 +32,23 @@ function getCityWeather(city) {
       alert("Unable to connect to OpenWeather");
     });
 };
+
+function formSubmitHandler(event) {
+ 
+  // prevent page from refreshing
+  event.preventDefault();
+
+  // get value from input element
+  var cityName = cityInputEl.value.trim();
+
+  if (cityName) {
+    getCityWeather(cityName);
+
+    // clear old content
+    weatherContainerEl.textContent = "";
+    cityInputEl.value = "";
+  } else {
+    alert("Please enter a city");
+  }
+};
+

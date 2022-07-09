@@ -135,3 +135,15 @@ function formSubmitHandler(event) {
     }
   
   };
+
+  // save search history to local storage
+  var saveSearchedCities = function(city) {
+    if (!searchedCities.includes(city)) {
+       searchedCities.push(city);
+    }
+    localStorage.setItem("searchHistory", JSON.stringify(searchedCities));
+    localStorage.setItem("searchedCity", JSON.stringify(searchedCity));
+
+    // display searched cities
+    loadSearchedCities();
+  };

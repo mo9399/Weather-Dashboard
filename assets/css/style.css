@@ -4,4 +4,5 @@
     -webkit-text-fill-color: transparent;
     -webkit-background-clip:text;
     font-size: 45px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }

@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <header class="bg-primary bg-gradient text-center">
+    <header class="text-center">
       <h1 class="text">Weather Dashboard</h1>
     </header>
 
@@ -45,21 +45,21 @@
           <!-- right column -->
           <div id="weather-container" class="col-md-9 d-flex flex-column p-4">
             <!-- current weather -->
-            <div id="current-weather" class="p-3">
+            <div id="current-weather" class="current-weather p-3 ">
               <h2 id="current-weather-title"></h2>
-              <div id="current-data">
+              <div id="current-data" class="text-center">
                 <p class="text-body" id="current-weather-temp"></p>
                 <p class="mt-4 text-body" id="current-weather-wind"></p>
                 <p class="mt-4 text-body" id="current-weather-humidity"></p>
                 <section id="uvindex">
-                  <p class="mt-4 text-body" id="current-weather-uvi"></p>
+                  <p class="mt-4 text-center" id="current-weather-uvi"></p>
                 </section>
               </div>
             </div>
             <!-- 5-day forcast -->
             <div id="5-day-forecast" class="mt-4">
               <h3 id="forecast-title"></h3>
-              <div class="row justify-content-between" id="forecast"></div>
+              <div class="row justify-content-between text-center" id="forecast"></div>
             </div>
           </div>
         </div>

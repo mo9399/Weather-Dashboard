@@ -3,17 +3,17 @@ var cityInputEl = document.querySelector("#city");
 var weatherContainerEl = document.querySelector("#weather-container");
 var currentWeatherTitle = document.querySelector("#current-weather-title");
 var forecastTitle = document.querySelector("#forecast-title");
-var search = document.getElementById("search")
+var uvIndexEl = document.querySelector("#uvindex")
 
-search.addEventListener('click', formSubmitHandler)
+// array for search history
+var searchedCities = [];
+
 
 function getCityWeather(city) {
   console.log(city, 'CITY NAME LINE 29')
-  // format OpenWeather api url
+  //OpenWeather api url
   var apiUrl =
-    "https://api.openweathermap.org/geo/1.0/direct?q=" +
-    city +
-    "&appid=882224f2c6a36fd8e4f6c08b7c9f166e";
+    "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=a42b1bffc45c35fcb28a1fcc1fc29685&units=imperial";
 
   // make a request to url
   fetch(apiUrl)
@@ -22,7 +22,7 @@ function getCityWeather(city) {
       console.log(response, "API RESPONSE LINE 35");
       if (response.ok) {
         response.json().then(function (data) {
-          console.log(data);
+          displayWeather(data);
         });
       } else {
         alert("Error: " + response.statusText);
@@ -35,7 +35,7 @@ function getCityWeather(city) {
 
 function formSubmitHandler(event) {
  
-  // prevent page from refreshing
+  // prevent page refreshing
   event.preventDefault();
 
   // get value from input element
@@ -69,7 +69,7 @@ function formSubmitHandler(event) {
         //  display uvIndex
         $("#current-weather-uvi").text("UV Index: " + data.current.uvi)
   
-        // begin conditional for styling uv index section based on value
+        // styling uv index section based on value
         var uvIndexValue = data.current.uvi.toFixed(1);
         uvIndexEl.id = "uv-index";
       
@@ -103,7 +103,7 @@ function formSubmitHandler(event) {
     // Get data for 5 days
     for (i = 1; i <= 5; i++) {
       // create elements div elements for daily weather card
-      var cardDiv = $("<div>").addClass("col-md-2 m-2 py-3 card text-white bg-success");
+      var cardDiv = $("<div>").addClass("col-md-2 m-2 py-3 card text-white bg-primary");
       var cardBodyDiv = $("<div>").addClass("card-body p-1");
   
       // apend card body div to parent card div
@@ -133,7 +133,6 @@ function formSubmitHandler(event) {
       $("#forecast").append(cardDiv);
   
     }
-  
   };
 
   // save search history to local storage

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-An weather app that lets you see the current and 5-day forcast for any city.
+A weather app that lets you see the current and 5-day forcast for any city.
 
 ## Built With
 
